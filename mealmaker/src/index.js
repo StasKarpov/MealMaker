@@ -1,12 +1,40 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { render } from 'react-dom'
+import App from './components/App';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import products from './reducers'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const initial_state = {
+  availableProducts:[
+    {
+      id:1,
+      name:'bread',
+      description:'white bread'
+    },{
+      id:2,
+      name:'sugar',
+      description:'sugar is tasty but unhealthy'
+    },{
+      id:3,
+      name:'butter',
+      description:'you can eat it with bread'
+    }
+  ],
+  choosenProducts:[{
+      id:2,
+      name:'sugar',
+      description:'sugar is tasty but unhealthy'
+    }
+  ]
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const store = createStore(products,initial_state)
+
+console.log(store);
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
