@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ChoosenProduct = ({id,name,description,removeProduct}) => (
+const ChoosenProduct = ({id,name,description,quantity,removeProduct}) => (
   <li>
-    <h3>{name}</h3>
+    <h3>{name} {quantity>1 ? ' x'+quantity : ''}</h3>
     <h4>{description}</h4>
     <h6
       style={{color:'#F00'}}

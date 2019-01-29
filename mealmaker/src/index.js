@@ -24,7 +24,8 @@ const initial_state = {
   choosenProducts:[{
       id:2,
       name:'sugar',
-      description:'sugar is tasty but unhealthy'
+      description:'sugar is tasty but unhealthy',
+      quantity:1
     }
   ]
 }
