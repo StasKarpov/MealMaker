@@ -1,12 +1,13 @@
 import React from 'react'
-import Product from './Product'
+import ChoosenProduct from './ChoosenProduct'
 
-const ChoosenProductsList = ({products}) => (
+const ChoosenProductsList = ({products, removeProduct}) => (
   <ul>
     {products.map(product =>
-      <Product
+      <ChoosenProduct
         key={product.id}
         {...product}
+        removeProduct={()=>removeProduct(product.id)}
       />
     )}
    </ul>
