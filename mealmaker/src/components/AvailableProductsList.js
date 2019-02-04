@@ -5,9 +5,9 @@ const AvailableProductsList = ({products,chooseProduct}) => (
   <ul>
     {products.map(product =>
       <AvailableProduct
-        key={product.id}
+        key={product._id}
         {...product}
-        onClick={() => chooseProduct(product.id)}
+        onClick={() => chooseProduct(product._id)}
       />
     )}
    </ul>

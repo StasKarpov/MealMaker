@@ -1,7 +1,5 @@
 
 export default function products(state = [],action){
-  console.log('state');
-  console.log(state);
   switch (action.type) {
 
     case "CHOOSE_PRODUCT":{
@@ -21,8 +19,6 @@ export default function products(state = [],action){
                            {quantity:1, ...state.availableProducts.find(p => p.id === action.id)}
                         )
       }
-      console.log("new state");
-      console.log(new_state);
       return new_state
     }
     case "REMOVE_PRODUCT":
@@ -31,6 +27,20 @@ export default function products(state = [],action){
         choosenProducts: state.choosenProducts.filter(p => {
           return(p.id !== action.id)
         }).map(p => {return{...p}})
+      }
+    case "REQUEST_PRODUCTS":
+      return {
+        isFetching: true,
+        availableProducts: [],
+        choosenProducts: []
+    }
+    case "RECEIVE_PRODUCTS":
+      return {
+        isFetching: false,
+        availableProducts: action.availableProducts.map(p => {
+          return Object.assign({id:p._id},{...p})
+        }),
+        choosenProducts: []
       }
     default:
       return state

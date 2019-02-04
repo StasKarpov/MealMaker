@@ -5,9 +5,9 @@ const ChoosenProductsList = ({products, removeProduct}) => (
   <ul>
     {products.map(product =>
       <ChoosenProduct
-        key={product.id}
+        key={product._id}
         {...product}
-        removeProduct={()=>removeProduct(product.id)}
+        removeProduct={()=>removeProduct(product._id)}
       />
     )}
    </ul>

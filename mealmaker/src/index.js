@@ -2,37 +2,25 @@ import React from 'react';
 import { render } from 'react-dom'
 import App from './components/App';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware  } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 import products from './reducers'
+import { fetchProducts } from './actions'
 
-const initial_state = {
-  availableProducts:[
-    {
-      id:1,
-      name:'bread',
-      description:'white bread'
-    },{
-      id:2,
-      name:'sugar',
-      description:'sugar is tasty but unhealthy'
-    },{
-      id:3,
-      name:'butter',
-      description:'you can eat it with bread'
-    }
-  ],
-  choosenProducts:[{
-      id:2,
-      name:'sugar',
-      description:'sugar is tasty but unhealthy',
-      quantity:1
-    }
-  ]
-}
+const loggerMiddleware = createLogger()
 
-const store = createStore(products,initial_state)
 
-console.log(store);
+const store = createStore(
+  products,
+  applyMiddleware(
+    thunkMiddleware, // lets us dispatch() functions
+    loggerMiddleware // neat middleware that logs actions
+  ))
+
+
+store.dispatch(fetchProducts()).then(() => console.log(store.getState()))
+
 render(
   <Provider store={store}>
     <App />
